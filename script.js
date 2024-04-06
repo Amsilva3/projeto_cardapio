@@ -64,14 +64,15 @@ function updateCartModal() {
       "justify-between",
       "mb-4",
       "flex-col"
+      
     );
 
     cartItemElement.innerHTML = `
-        <div class= 'flex items-center justify-between'>
+        <div class= 'flex items-center justify-between  '>
             <div>
-                <p class= 'font-medium'>${item.name}</p>
+                <p class='font-medium'>${item.name}</p>
                 <p>Qtd: ${item.quantity}</p>
-                <p class= 'font-medium mt-2'>€ ${item.price.toFixed(2)}</p>
+                <p class='font-medium mt-2'>€ ${item.price.toFixed(2)}</p>
             </div>
             
             <button class='remove-from-cart-btn' data-name= '${item.name}'>
@@ -152,18 +153,18 @@ checkoutBtn.addEventListener("click", function () {
 
   const cartItems = cart
     .map((item) => {
-      return `${item.name} Quantidade: (${item.quantity}) Preço:€ ${item.price}|`;
+      return `${item.name} Quantidade: (${item.quantity}) Preço:€ ${item.price} | `;
     })
     .join("");
 
   const message = encodeURIComponent(cartItems);
-  const phone = "*********"; // colocar o numero  de telefone aqui ex:'49456123456'
+  const phone = "************"; // colocar o numero  de telefone aqui ex:'49456123456'
 
   window.open(
-    `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`,
+    `https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value} | Total a ser pago pelo cliente: ${cartTotal.textContent}`,
     "_blank"
   );
-
+  addressInput.value = [];
   cart = [];
   updateCartModal();
 });

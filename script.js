@@ -41,6 +41,7 @@ function addToCart(name, price) {
 
   if (existingItem) {
     existingItem.quantity += 1;
+    updateCartModal();
     return;
   } else {
     cart.push({
@@ -49,13 +50,13 @@ function addToCart(name, price) {
       quantity: 1,
     });
   }
-
   updateCartModal();
 }
 
 function updateCartModal() {
   cartItemsContainer.innerHTML = "";
   let total = 0;
+  let totalQuantidade = 0;
 
   cart.forEach((item) => {
     const cartItemElement = document.createElement("div");
@@ -82,6 +83,7 @@ function updateCartModal() {
         </div>
     `;
     total += item.price * item.quantity;
+    totalQuantidade +=  item.quantity;
 
     cartItemsContainer.appendChild(cartItemElement);
   });
@@ -89,8 +91,8 @@ function updateCartModal() {
     style: "currency",
     currency: "EUR",
   });
-
-  cartCounter.innerHTML = cart.length;
+  
+  cartCounter.innerHTML = totalQuantidade;
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
